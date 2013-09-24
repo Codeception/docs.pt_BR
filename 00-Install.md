@@ -2,7 +2,7 @@
 
 **Phar**
 
-Baixe o Codeception phar executável de  http://codeception.com/thanks
+Baixe o phar executável do Codeception em http://codeception.com/thanks
 
 ~~~
 wget http://codeception.com/codecept.phar .
