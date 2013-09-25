@@ -1,28 +1,27 @@
-# Introduction
+# Introdução
 
-The idea behind testing is not new. You can't sleep well if you are not confident that your last commit didn't take down the whole application.
-Having your application covered with tests gives you more trust in the stability of your application. That's all.
+A ideia por trás de testes não é nova. Você não pode dormir bem se não tiver confiante que seu último commit não derrubou a aplicação toda.
+Tendo sua aplicação coberta por testes, lhe dá mais confiança na estabilidade de sua aplicação. Isso é tudo.
 
-In most cases tests don't guarantee that the application works 100% as it is supposed to. You can't predict all possible scenarios and exceptional situations for complex apps.
-But you can cover with tests the most important parts of your app and at least be sure they work as predicted.
+Na maioria dos casos os testes não garantem que a aplicação funciona 100%. Você não pode prever todos os cenários possiveis e situações excepcionais em apps complexos. Mas você pode cobrir com testes as partes mais importantes de suas aplicações e pelo menos ter a certeza que elas funcionam como o previsto.
 
-There are plenty of ways to test your application. The most popular paradigm is [Unit Testing](http://en.wikipedia.org/wiki/Unit_testing Unit Testing). As for web applications, testing the controller, or model in isolation doesn't prove your application is working. To test the behavior of your application as a whole, you should write functional or acceptance tests.
+Há muitas maneiras de testar sua aplicação. O paradigma mais popular é o [Teste de Unidade](http://pt.wikipedia.org/wiki/Teste_de_unidade). Para aplicações web, testar o Controller ou o Model isoladamente não comprova que sua aplicação está funcionando. Para testar sua aplicação como um todo, você deve escrever testes funcionais ou testes de aceitação.
 
-The Codeception testing framework distinguishes these levels of testing. Out of the box you have tools for writing unit, functional, and acceptance tests in a single manner.
+O Framework de testes Codeception distingue estes niveis de teste, de uma forma criativa, você tem ferramentas para escrever testes de unidade, funcionais e de aceitação em uma única maneira.
 
-Let's review the listed testing paradigms in reverse order.
+Vamos rever os parádigmas de testes listados em uma ordem reversa.
 
-### Acceptance Tests (WebGuy)
+### Testes de Aceitação (WebGuy)
 
-How does your client, manager, or tester, or any other non-technical person, know your site is working? She opens the browser, enters the site, clicks on links, fills the forms, and sees the proper pages as a result. She has no idea of the framework, database, web-server, or programming language you are using. If she sees improper behavior, she will create a bug report. Still this person has no idea why the application didn't work as expected.
+Como o seu cliente, gerente, testador ou qualquer outra pessoa não-técnica, sabe que seu site está funcionando? Eles abrem o navegador, acessam o site, clicam nos links, preenchem os formulários e olham se as páginas apresentam os resultados esperados. Eles não tem nenhuma ideia de framework, banco de dados, servidor web ou linguagem de programação que você está usando, se eles acharem algum comportamento impróprio, eles iráo criar um report de bug. Essas pessoas não tem ideia por que a aplicação não funciona como o esperado.
 
-Acceptance tests can cover standard but complex scenarios from a user perspective. With acceptance tests you can be confident that users, following all defined scenarios, won't get errors. 
+Testes de aceitação podem cobrir cenários padrões mas complexos de uma perspectiva de usuário. Com os testes de aceitaçao você pode ficar confiante que se aqueles usuários seguirem cenários definidos, não vão ter erros.
 
-Codeception provides browser emulation powered by [Mink](http://mink.behat.org) for writing and executing acceptance tests. This can be done with tools like **Selenium**, but Codeception with Mink is more flexible for such tests. 
+O Codeception provê a emulação do navegador, oferecido pelo [Mink](http://mink.behat.org), para escrever e executar testes de aceitação. Eles podem ser feitos com ferramentas como o **Selenium** mas com o Mink é mais flexivel.
 
-Please, note that **any site** can be covered with acceptance tests. Even if you use a very custom CMS or framework.
+Por favor, note que **qualquer site** pode ser coberto com testes de aceitação. Mesmo se você usar um CMS muito personalizado ou um framework.
 
-#### Sample acceptance test
+#### Exemplo de teste de aceitação
 
 ``` php
 <?php
@@ -34,30 +33,29 @@ $I->see('Thank you for Signing Up!');
 ?>
 ```
 
-#### Pros
+#### Prós
 
-* can be run on any website
-* can test javascript and ajax requests
-* can be shown to your clients and managers
-* the most stable: less affected by changes in source code or technologies.
+* pode ser executado em qualquer website.
+* pode testar javascript e requisições ajax.
+* pode ser mostrado para seus clientes e gerentes.
+* o mais estável: o menos afetado por alterações no código fonte ou tecnologias.
 
-#### Cons
-* fewer checks can lead to false-positive results
-* the slowest: requires running browser and database repopulation.
-* yep, they are really slow.
+#### Contra
 
+* poucos checks podem levar a resultados com falso-positivo.
+* o mais lento: requer execução do navegador e repopulação do banco de dados.
+* yep, ele é realmente lento.
 
-### Functional Tests (TestGuy)
+### Testes Funcionais (TestGuy)
 
-Let's say your application is tested by a technically advanced guy. He also opens the browser, enters the site, clicks links and submits forms, but when an error occurs he can report to you the exception that was thrown, or check the database for expected values. This guy already knows some aspects of your application, and by knowing that his tests can cover more technical details.
+Vamos dizer que sua aplicação é testada por uma pessoa tecnicamente avançada. Ela vai abrir o navegador, entrar no site, clicar nos links e enviar formulários, mas quando um erro ocorre ela reporta para você a exceção que pegou ou verifica no banco de dados o valor esperado. Essa pessoa ja conhece alguns aspectos da sua aplicação e por conhecer estes, seus testes podem cobrir mais detalhes técnicos.
 
-Functional tests are run without browser emulation. For functional tests you emulate a web request and submit it to your application. It should return to you a response. You can make assertions about the response, and also access the application's internal values.
+Testes funcionais são executados sem a emulação do navegador. Para os testes funcionais você emula a requisição web e envia isso para a sua aplicação. Ele deve retornar para você uma resposta, você pode fazer assertions com essa resposta e também acessar valores internos da aplicação.
+Para os testes funcionais sua aplicação deve estar preparada para ser executada em modo de testes. Para os frameworks como o Symfony1, Symfony2 ou o Zend é fácil iniciar a aplicação em modo de teste.
 
-For functional tests your application should be prepared to be run in test mode. For frameworks like Symfony2, Symfony1, or Zend, it's easy to start an application in test mode. 
+O Codeception provê conectores para os mais populares frameworks de PHP, mas você pode escrever o seu próprio.
 
-Codeception provides connectors to several popular PHP frameworks, but you can write your own.
-
-#### Sample functional test
+#### Exemplo de teste funcional
 
 ``` php
 <?php
@@ -71,35 +69,35 @@ $I->seeInDatabase('users', array('email' => 'miles@davis.com'));
 ?>
 ```
 
-#### Pros
+#### Prós
 
-* like acceptance tests, but much faster.
-* can provide more detailed reports.
-* you can still show this code to managers and clients.
-* stable enough: only major code changes, or moving to other framework, can break them. 
+* como os testes de aceitação mas mais rápido.
+* pode prover relatórios mais detalhados.
+* você pode mostrar este código para os gerentes e clientes.
+* bastante estável: somente alterações maiores em código ou alterações para outro framework podem quebra-los. 
 
-#### Cons
+#### Contra
 
-* javascript and ajax can't be tested.
-* by emulating the browser you might get more false-positive results.
-* require a framework.
+* javascript e ajax não podem ser testadas.
+* por emulação de navegador você pode ter mais resultados falso-positivo.
+* requer um framework.
 
-### Unit Tests (CodeGuy)
+### Testes de Unidade (CodeGuy)
 
-Only the developer understands how and what is tested here. It can be either unit or integration tests, but they are limited to check one method per test.
+Somente os desenvolvedores entendem como e o que é testado aqui. Ele pode ser tanto de unidade ou testes integrados mas são limitados a verificar um método por teste.
 
-The only difference between unit tests and integration tests is that a unit test should be run in total isolation. All other classes or methods should be replaced with stubs. 
+A única diferença entre os testes de unidade e os testes integrados é que os testes de unidade podem ser executados em totalmente isolados. Todos as outras classes ou métodos podem ser substituidas por stubs.
 
-Codeception is created on top of [PHPUnit](http://www.phpunit.de/). If you have experience writing unit tests with PHPUnit you can continue doing so. Codeception has no problem executing standard PHPUnit tests. 
+O Codeception é criado no topo do [PHPUnit](http://www.phpunit.de/). Se você te experiência escrevendo testes unitários com o PHPUnit pode continuar fazendo como já o faz, Codeception suporta testes padrão PHPUnit.
 
-But Codeception provides some good tools to make your unit tests simpler and cleaner. Even inexperienced developers should understand what is tested and how. Requirements and code can change rapidly, and unit tests should be updated every time to fit requirements. The better you understand the testing scenario, the faster you can update it for new behavior. 
+Mas o Codeception provê algumas boas ferramentas para fazer seus testes unitários simples e limpos. Mesmo os desenvolvedores inexperientes devem entender o que é testado e como. Requisitos e códigos podem ser alterados rapidamente e os testes unitários deve ser atualizados para atender os requisitos. Quanto melhor você entender o cenário de teste, mais rápido você pode atualizá-lo para o novo comportamento.
 
-#### Sample integration test
+#### Exemplo de teste integrado
 
 ``` php
 <?php
-// we are testing the public method of User class.
-// It requires the user_id and array of parameters.
+// nos estamos testando o método publico da classe User.
+// E requerido o user_id e um array de parametros.
 
 $I = new CodeGuy($scenario);
 $I->testMethod('User.update');
@@ -111,20 +109,20 @@ $I->seeInDatabase('users', array('id' => 1, 'username' => 'miles'));
 ?>
 ```
 
-#### Pros
+#### Prós
 
-* fast as hell (well, in the current example, you still need database repopulation).
-* can cover rarely used features.
-* can test stability of application core.
-* you can only be considered a good developer if you write them :)
+* muito rápido (bem, neste exemplo você precisa de repopulação de banco de dados).
+* pode cobrir funcionalidades raramente utilizadas.
+* pode testar a estabilidade do core da aplicação.
+* você somente pode ser considerado um bom desenvovledor se você escrever estes :)
 
-#### Cons
+#### Contra
 
-* doesn't test connections between units.
-* most unstable: very sensitive to code changes.
+* não testa conexão entre unidades.
+* mais instável: muito sensivel com alterações de código.
 
-## Conclusion
+## Conclusão
 
-Despite the wide popularity of TDD, few PHP developers ever write automatic tests for their applications. The Codeception framework was developed to make the testing actually fun. It allows writing unit, functional, integration, and acceptance tests in one style.
+Apesar da grande popularidade do TDD, poucos desenvolvedores PHP escrevem testes automatizados para suas aplicações. O framework Codeception foi desenvolvido para fazer o teste realmente divertido. Ele permite escrever testes unitários, funcionais, integrados e de aceitação em um mesmo estilo.
 
-It could be called a BDD framework. All Codeception tests are written in a descriptive manner. Just by looking in the test body you can get a clear understanding of what is being tested and how it is performed. Even complex tests with many assertions are written in a simple PHP DSL.
+Ele pode ser chamado de um frameowrk de BDD. Todos os testes do Codeception são escritos de uma maneira descritiva. Simplesmente olhandos para o corpo do teste você pode entender claramente o que esta sendo testado e como ele é realizado. Todo teste complexo com muitas assertions são escritos em uma simples PHP DSL.
